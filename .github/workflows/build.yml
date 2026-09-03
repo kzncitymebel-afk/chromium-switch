@@ -19,9 +19,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Обновляем пакеты и устанавливаем необходимые библиотеки
+          # Обновляем пакеты
           dkp-pacman -Syu --noconfirm
-          dkp-pacman -S --noconfirm switch-libnx switch-deko3d switch-imgui
+          # Устанавливаем необходимые библиотеки (правильные имена!)
+          dkp-pacman -S --noconfirm switch-libnx switch-libdeko3d switch-libimgui
 
       - name: Build project
         run: |
