@@ -6,7 +6,6 @@ on:
   workflow_dispatch:
 
 env:
-  # Принудительно используем Node.js 20 для совместимости
   ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 jobs:
@@ -17,6 +16,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          # Обновляем пакеты и устанавливаем необходимые библиотеки
+          dkp-pacman -Syu --noconfirm
+          dkp-pacman -S --noconfirm switch-libnx switch-deko3d switch-imgui
 
       - name: Build project
         run: |
