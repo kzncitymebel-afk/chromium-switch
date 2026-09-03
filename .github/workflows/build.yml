@@ -17,11 +17,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup devkitPro repository
+        run: |
+          # Добавляем официальный репозиторий devkitPro
+          echo "Server = https://downloads.devkitpro.org/packages" > /etc/pacman.d/dkp-mirrorlist
+          echo "Server = https://www.mirrorservice.org/sites/downloads.devkitpro.org/packages" >> /etc/pacman.d/dkp-mirrorlist
+          # Обновляем список пакетов
+          pacman -Syy
+
       - name: Install dependencies
         run: |
-          # Обновляем пакеты
-          dkp-pacman -Syu --noconfirm
-          # Устанавливаем необходимые библиотеки (правильные имена!)
+          # Устанавливаем необходимые библиотеки
           dkp-pacman -S --noconfirm switch-libnx switch-libdeko3d switch-libimgui
 
       - name: Build project
