@@ -13,7 +13,7 @@ BUILD		:=	build
 SOURCES		:=	source
 INCLUDES	:=	include
 
-# Пути к библиотекам devkitPro
+# ПРАВИЛЬНЫЕ пути для devkitPro в Docker
 PORTLIBS	:=	$(DEVKITPRO)/portlibs/switch
 LIBNX		:=	$(DEVKITPRO)/libnx
 
@@ -30,10 +30,13 @@ ASFLAGS	:=	-g $(ARCH)
 
 LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
+# ЯВНО указываем библиотеки
 LIBS	:= -ldeko3d -limgui -lnx -lm -lstdc++ -lglapi
 
+# ЯВНО указываем пути к библиотекам
 LIBDIRS	:= $(PORTLIBS) $(LIBNX)
 
+#---------------------------------------------------------------------------------
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #---------------------------------------------------------------------------------
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
